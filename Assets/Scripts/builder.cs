@@ -4,9 +4,9 @@ using UnityEngine;
 
 public class builder : MonoBehaviour
 {   
-    public Vector3 terrainArea;
+    public Vector3 terrainArea; // the terrain you wants to place random objects
     public GameObject prefab;
-    public int amountClones;    
+    public int amountClones; // how many objects you want to place inside the terrain area
     private float xMinimum, xMaximum, zMinimum, yMinimum, zMaximum;
     
     private void Start() {
@@ -14,7 +14,7 @@ public class builder : MonoBehaviour
         GameObject go = GameObject.Find("Terrain");
         Terrain terrain = go.GetComponent<Terrain>();
         
-        terrainArea = terrain.terrainData.size;        
+        terrainArea = terrain.terrainData.size;
         xMinimum = transform.position.x;
         zMinimum = transform.position.z;
         xMaximum = xMinimum + terrainArea.x;
@@ -32,13 +32,13 @@ public class builder : MonoBehaviour
         objPos.name = "Builder";
 
         RaycastHit hit;
-        Ray rayDown = new Ray(objPos.transform.position, Vector3.down);
+        Ray rayDown = new Ray(objPos.transform.position, Vector3.down); // height reference to create the prefab
 
         if (Physics.Raycast (rayDown, out hit, 100)) {
             
             // Debug.Log(hit.distance + " - Height");
             // Debug.Log(hit.point + " - Coordinates");
-            prefab = Instantiate(prefab, hit.point, Quaternion.identity);            
+            prefab = Instantiate(prefab, hit.point, Quaternion.identity);
             prefab.transform.localScale = new Vector3(0.07414654f, 0.07414654f, 0.07414654f);
             prefab.transform.position = new Vector3(prefab.transform.position.x,
                                                     prefab.transform.position.y,
