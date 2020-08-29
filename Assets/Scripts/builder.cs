@@ -2,8 +2,8 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class builder : MonoBehaviour
-{   
+public class builder : MonoBehaviour {
+
     public Vector3 terrainArea; // the terrain you wants to place random objects
     public GameObject prefab;
     public int amountClones; // how many objects you want to place inside the terrain area
@@ -11,8 +11,8 @@ public class builder : MonoBehaviour
     
     private void Start() {
 
-        GameObject go = GameObject.Find("Terrain");
-        Terrain terrain = go.GetComponent<Terrain>();
+        GameObject findTerrain = GameObject.Find("Terrain");
+        Terrain terrain = findTerrain.GetComponent<Terrain>();
         
         terrainArea = terrain.terrainData.size;
         xMinimum = transform.position.x;
@@ -22,22 +22,20 @@ public class builder : MonoBehaviour
 
         for (int i=0; i < amountClones; i++) {
 
-            InstantiateGameObject();
+            SetPrefab();
         }
     }
-    private void InstantiateGameObject() {
+    private void SetPrefab() {
 
         GameObject objPos = new GameObject();
         objPos.transform.position = new Vector3(Random.Range(xMinimum, xMaximum), 100f, Random.Range(zMinimum, zMaximum));
         objPos.name = "Builder";
 
         RaycastHit hit;
-        Ray rayDown = new Ray(objPos.transform.position, Vector3.down); // height reference to create the prefab
+        Ray getHeight = new Ray(objPos.transform.position, Vector3.down); // height reference to create the prefab
 
-        if (Physics.Raycast (rayDown, out hit, 100)) {
+        if (Physics.Raycast (getHeight, out hit, 100)) {
             
-            // Debug.Log(hit.distance + " - Height");
-            // Debug.Log(hit.point + " - Coordinates");
             prefab = Instantiate(prefab, hit.point, Quaternion.identity);
             prefab.transform.localScale = new Vector3(0.07414654f, 0.07414654f, 0.07414654f);
             prefab.transform.position = new Vector3(prefab.transform.position.x,
