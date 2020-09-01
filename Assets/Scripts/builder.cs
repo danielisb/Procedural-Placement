@@ -37,7 +37,7 @@ public class builder : MonoBehaviour {
         if (Physics.Raycast (getHeight, out hit, 100)) {
             
             prefab = Instantiate(prefab, hit.point, Quaternion.identity);
-            prefab.transform.localScale = new Vector3(0.07414654f, 0.07414654f, 0.07414654f);
+            //prefab.transform.localScale = new Vector3(0.07414654f, 0.07414654f, 0.07414654f);
             prefab.transform.position = new Vector3(prefab.transform.position.x,
                                                     prefab.transform.position.y,
                                                     prefab.transform.position.z);
