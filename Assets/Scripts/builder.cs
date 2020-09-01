@@ -15,13 +15,17 @@ public class builder : MonoBehaviour {
 
     [Header("Size Settings")]
     public float minSize, maxSize;
+
+    int built;
     
     private float xMinimum, xMaximum, zMinimum, yMinimum, zMaximum;
     
     private void Start() {
 
-        GameObject findTerrain = GameObject.Find("Terrain");
-        Terrain terrain = findTerrain.GetComponent<Terrain>();
+        built = 0;
+
+        GameObject getTerain = GameObject.Find("Terrain");
+        Terrain terrain = getTerain.GetComponent<Terrain>();
         
         terrainArea = terrain.terrainData.size;
         xMinimum = transform.position.x;
@@ -33,6 +37,7 @@ public class builder : MonoBehaviour {
 
             SetPrefab();
         }
+        print("Total Prefabs: " + built);
     }
 
     private void SetPrefab() {
@@ -45,7 +50,8 @@ public class builder : MonoBehaviour {
         Ray getHeight = new Ray(objPos.transform.position, Vector3.down); // height reference to create the prefab
 
         if (Physics.Raycast (getHeight, out hit, 100)) {
-            
+
+            built++;
             prefab = Instantiate(prefab, hit.point, Quaternion.identity);
             SetRandomPosition();
             SetRandomRotation();
