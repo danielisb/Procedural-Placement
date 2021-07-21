@@ -1,4 +1,4 @@
 # Procedural Placement (Unity3D)
-Generate random gameObjects inside the terrain area.
+Instantiate random gameObjects within the terrain area.
 
 ![](example.png)
